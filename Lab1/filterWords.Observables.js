@@ -6,7 +6,7 @@ let str = "This house is nice!";
 let isPromise = true;
 //isPromise = false;
 
-const { from } = rxjs;
+const { from } = require("rxjs");
 
 let filterWords = function (arg) {
     //console.log(arg[0]);
