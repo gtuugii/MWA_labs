@@ -2,7 +2,9 @@
 
 //This *** is ***!
 String.prototype.filterWords = function(arg){
-    return this.replace(arg[0], "***").replace(arg[1], "***");
+    return this.split(/[! ]/)
+        .map(m => arg.find(e => m == e) ? "***" : m)
+        .join(" ");
     
 };
 

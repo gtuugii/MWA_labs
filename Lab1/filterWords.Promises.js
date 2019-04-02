@@ -9,7 +9,9 @@ let filterWords = function (arg) {
     //console.log(arg[0]);
     return new Promise(function (resolve, reject) {
         if (isPromise)
-            resolve( str.replace(arg[0], "***").replace(arg[1], "***") );
+            resolve(str.split(/[! ]/)
+                        .map(m => arg.find(e => m == e) ? "***" : m)
+                        .join(" ") );
         else reject("This is false");
     })
 }

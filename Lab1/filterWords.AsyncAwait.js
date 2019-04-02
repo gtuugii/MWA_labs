@@ -11,7 +11,9 @@ let filterWords = function (arg) {
         if (isPromise)
             resolve(
                 //"This is true"
-                str.replace(arg[0], "***").replace(arg[1], "***")
+                str.split(/[! ]/)
+                    .map(m => arg.find(e => m == e) ? "***" : m)
+                    .join(" ")
             );
         else reject("This is false");
     })
