@@ -1,10 +1,12 @@
 let dns = require('dns');
-let { promisify} = require('util');
-let hostname = 'wwww.mum.edu';
+let util = require('util');
+let hostname = "www.mum.edu";
 
-const dnsResolve4 = promisify(dns.resolve4);
+let dnsResolve4 = util.promisify(dns.resolve4);
 dnsResolve4(hostname)
-    .then(addresses => console.log(addresses))
+    .then(addresses => addresses.forEach(function (ip) {
+        console.log('ip: ' + ip);
+    }))
     .catch(err => console.log(err));
 
 

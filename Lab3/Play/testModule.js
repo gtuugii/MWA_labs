@@ -1,13 +1,9 @@
-let dns = require("dns");
-let hostname = 'www.mum.edu';
-//console.log(dns);
+const util = require('util');
+const dns = require('dns');
 
-let res = dns.resolve4(hostname, (error, addresses)=>{
-    if (error) throw error;
+const dnsResolveAsync = util.promisify(dns.resolve);
+dnsResolveAsync('www.google.com')
+    .then(addresses => console.log(addresses))
+    .catch(err => console.log(err));
 
-    console.log('addresses: ' + JSON.stringify(addresses));
-
-    addresses.forEach(function (ip) {
-        console.log('ip: ' + ip);
-    });
-});
+    

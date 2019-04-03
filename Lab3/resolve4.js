@@ -1,5 +1,5 @@
 let dns = require("dns");
-let hostname = 'www.mum.edu';
+let hostname = 'mum.edu';
 //console.log(dns);
 
 let res = dns.resolve4(hostname, (error, addresses) => {
