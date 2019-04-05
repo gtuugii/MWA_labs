@@ -15,7 +15,7 @@
 
     const server = http.createServer(function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.write(req.url);
+        //res.write(req.url);
         let obj = url.parse(req.url, true);
         console.log(req.url);
         //?url=path/to/my/file.txt
