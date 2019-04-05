@@ -1,8 +1,17 @@
 (function () {
 
-    let http = require('http');
-    let fs = require('fs');
-    let url = require('url');
+    const http = require('http');
+    const fs = require('fs');
+    const url = require('url');
+    const queryString = require('querystring');
+    const { fork, exec } = require("child_process");
+
+        // let qstring = queryString.stringify({
+        //     name: 'Battuguldur',
+        //     course: 'MWA'
+        // });
+        // console.log(qstring);
+        // console.log(queryString.parse(qstring));
 
     const server = http.createServer(function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -14,12 +23,22 @@
 
         //res.write(ourl);
 
-        if (ourl != '')
-            fs.readFileSync(ourl);
-        
-        res.end();
+        if (ourl) {
+            let childProcess = fork("childProcess.js");
+            childProcess.send(ourl);
+            childProcess.on("message", chunk => {
+                if (chunk === null)
+                    res.end();
+                else
+                    res.write(Buffer.from(chunk));
+            })
+        }
+        else{
+            res.write('File not found.');
+            res.end();
+        }
     });
 
     server.listen(5000, ()=>{console.log('Listening server port: 5000')});
 
-})(); 
+})();

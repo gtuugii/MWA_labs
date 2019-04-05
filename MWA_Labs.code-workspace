@@ -1,7 +1,8 @@
 {
 	"folders": [
 		{
-			"path": "/Users/battuguldurg/node-course"
+			"path": "."
 		}
-	]
+	],
+	"settings": {}
 }
