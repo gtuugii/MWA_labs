@@ -1,13 +1,17 @@
-let dns = require("dns");
-let hostname = 'mum.edu';
-//console.log(dns);
+(function () {
 
-let res = dns.resolve4(hostname, (error, addresses) => {
-    if (error) throw error;
+    let dns = require("dns");
+    let hostname = 'mum.edu';
+    //console.log(dns);
 
-    console.log('addresses: ' + JSON.stringify(addresses));
+    let res = dns.resolve4(hostname, (error, addresses) => {
+        if (error) throw error;
 
-    addresses.forEach(function (ip) {
-        console.log('ip: ' + ip);
+        console.log('addresses: ' + JSON.stringify(addresses));
+
+        addresses.forEach(function (ip) {
+            console.log('ip: ' + ip);
+        });
     });
-});
+
+})();

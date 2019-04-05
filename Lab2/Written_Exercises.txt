@@ -1,7 +1,6 @@
 1. Explain why do we want sometimes to use setImmediate instead of using setTimeout?
 
-when there are lots of callback functions in Timer queue or
-when we want something to run right after any network request, I/O, Timer or idle operation.
+when there are lots of callback functions in Timer queue or when we want something to run right after any network request, I/O, Timer or idle operation.
 setImmediate will run right immediate after setTimeout with 0 second delay.
 
 signature:
@@ -10,7 +9,7 @@ signature:
 
 2. Explain the difference between process.nextTick and setImmediate?
 
-process.nextTick will always run before SΩetImmediate as it has the highest priority in the queues.
+process.nextTick will always run before setImmediate as it has the highest priority in the queues.
 setImmediate belongs to Check queue.
 When the priority comes to that queue, it will run in its corresponding cap.
 
