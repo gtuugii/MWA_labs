@@ -1,0 +1,16 @@
+GET http://localhost:8888/grades/  HTTP/1.1
+
+###
+
+GET http://localhost:8888/grades/1  HTTP/1.1
+###
+
+POST http://localhost:8888/grades/
+Content-Type: application/json
+
+{ "id": "10", "name": "Asaad Saad", "course": "CS572", "grade": "100" }
+
+####
+
+DELETE http://localhost:8888/grades/1  HTTP/1.1
+###
