@@ -3,13 +3,6 @@ const router = express.Router();
 const jsonParser = express.json();
 const Joi = require('Joi');
 
-const schema = {
-    id: Joi.required(),
-    name: Joi.string().min(3).required(),
-    course: Joi.string().min(3).required(),
-    grade: Joi.required()
-};
-
 const grades = [
     { id: 1, name: 'Asaad Saad', course: "CS572", grade: 100 },
     { id: 2, name: 'Tuugii', course: "CS572", grade: 99 },
@@ -18,11 +11,11 @@ const grades = [
     { id: 5, name: 'Unknown', course: "CS572", grade: 96 }
 ];
 
-//GET       app.get()       /api/grades
-//GET       app.get()       /api/grades/:id
-//PUT       app.put()       /api/grades/:id
-//DELETE    app.delete()    /api/grades/:id
-//POST      app.post()      /api/grades
+//GET               app.get()       /api/grades
+//GET               app.get()       /api/grades/:id
+//PUT-update        app.put()       /api/grades/:id
+//DELETE            app.delete()    /api/grades/:id
+//POST-insert       app.post()      /api/grades
 
 router.get('/', (req, res, next) => {
     //console.log('router /grades');
@@ -39,9 +32,7 @@ router.get('/:id', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
     const grade = grades.find(g => parseInt(g.id) === parseInt(req.params.id));
-
-    if(!grade)
-        return res.status('400').send(`The grade with the given ID was not found: ${req.params.id}`);
+    if(!grade)  return res.status('400').send(`The grade with the given ID was not found: ${req.params.id}`);
 
     const index = grades.indexOf(grade);
     grades.splice(index, 1);
@@ -49,23 +40,11 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.post('/', jsonParser, (req, res, next) => {
-    console.log(req.body);
-
-    let joi = Joi.validate(req.body, schema);
-    console.log(joi);
-    
-    if (parseInt(req.body.id) <= 0 || !req.body.id)
-        return res.status('400').send(`This id is smaller then 0 or empty: ${req.body.id}`);
-    if (!req.body.name)
-        return res.status('400').send(`The name is empty!`);
-    if (!req.body.grade)
-        return res.status('400').send(`The grade is empty!`);
-    if (!req.body.course)
-        return res.status('400').send(`The course is empty!`);
+    const { error } = validateGrade(req.body);  //result.error
+    if (error)  return res.status(400).send(error.details[0].message);
 
     const grade = grades.find(g => parseInt(g.id) === parseInt(req.body.id));
-    if (grade)
-        return res.status('400').send(`This id is duplicated: ${req.body.id}`);
+    if (grade)  return res.status('400').send(`This id is duplicated: ${req.body.id}`);
 
     const newGrade = {
         "id": parseInt(req.body.id),
@@ -78,9 +57,28 @@ router.post('/', jsonParser, (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
+    const { error } = validateGrade(req.body);  //result.error
+    if (error)  return res.status(400).send(error.details[0].message);
+    
+    const grade = grades.find(g => parseInt(g.id) === parseInt(req.body.id));
+    if (!grade) return res.status('400').send(`The grade with the given ID was not found: ${req.params.id}`);
 
-    console.log(req.body);
-    res.send('sdfsdf');
+    grade.name      = req.body.name;
+    grade.course    = req.body.course;
+    grade.grade     = req.body.grade;
+    
+    res.send(grades);
 });
+
+function validateGrade(grade){
+    const schema = {
+        id: Joi.number().integer().min(1).required(),
+        name: Joi.string().min(3).required(),
+        course: Joi.string().required(),
+        grade: Joi.number().integer().min(0).max(100).required()
+    };
+
+    return Joi.validate(grade, schema);
+}
 
 module.exports = router;

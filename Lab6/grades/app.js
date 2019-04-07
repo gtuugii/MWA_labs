@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fs = require('fs');
+var rfs = require('rotating-file-stream');
+const cors = require('cors');
 
 const urlencodedParser = express.urlencoded({ extended: false });
 
@@ -23,8 +26,19 @@ app.set('etag', true);
 app.disable("x-powered-by");
 app.set('env', 'development');
 app.set('trust proxy', true);
-app.enable('case sensitive routing');
-app.enable("strict routing");
+app.set('case sensitive routing', true);
+app.set("strict routing", true);
+
+var logDirectory = path.join(__dirname, 'log');
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+// create a rotating write stream
+var accessLogStream = rfs('access.log', {
+  interval: '1d', // rotate daily
+  path: logDirectory
+});
+app.use(logger('combined', { stream: accessLogStream }));
+
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
