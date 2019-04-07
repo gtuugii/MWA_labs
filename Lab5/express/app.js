@@ -16,9 +16,11 @@ app.set('view engine', 'jade');
 
 app.set('port', process.env.PORT || port);
 app.set('etag', true);
+app.disable("x-powered-by");
 app.set('env', 'development');
 app.set('trust proxy', true);
 app.enable('case sensitive routing');
+app.enable("strict routing");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -45,6 +47,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
 port = app.get('port');
-app.listen(port, () => { console.log('Listening port : ' + port); });
+app.listen(port, () => { console.log('The server is running on port %s', port); });
+
+module.exports = app;
