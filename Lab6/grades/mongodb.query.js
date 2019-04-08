@@ -1,27 +1,4 @@
-GET http://localhost:8888/grades/  HTTP/1.1
-
-###
-
-GET http://localhost:8888/grades/8/  HTTP/1.1
-###
-
-POST http://localhost:8888/grades/
-Content-Type: application/json
-
-{ "id": "8", "name": "Battuguldur", "course": "f", "grade": "100" }
-
-####
-
-DELETE http://localhost:8888/grades/1  HTTP/1.1
-###
-
-
-PUT http://localhost:8888/grades/1
-Content-Type: application/json
-
-{ "id": "1", "name": "Battuguldur", "course": "s", "grade": "100" }
-
-//insert
+//INSERT
 db.grades.insert(
 [
 	{ id: 1, name: 'Asaad Saad', course: "CS572", grade: 100 },
@@ -39,7 +16,6 @@ db.grades.find().pretty()
 //WHERE
 db.grades.find({name: "Tuugii"})
 db.grades.find({name: "Tuugii"}).pretty()
-
 
 //UPDATE
 db.grades.update({name: "Tuugii"}, { id: 2, name: 'Battuguldur', course: "CS572", grade: 99 });
