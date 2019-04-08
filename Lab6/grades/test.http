@@ -2,7 +2,7 @@ GET http://localhost:8888/grades/  HTTP/1.1
 
 ###
 
-GET http://localhost:8888/grades/8/  HTTP/1.1
+GET http://localhost:8888/grades/1/  HTTP/1.1
 ###
 
 POST http://localhost:8888/grades/

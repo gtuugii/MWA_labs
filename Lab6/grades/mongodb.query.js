@@ -30,7 +30,7 @@ db.grades.update({name: "Battuguldur"}, {$rename: {"gender": "sex"}})
 db.grades.update({name: "Battuguldur"})
 db.grades.update({id: 1})
 
-//
+//Update, find
 db.grades.update({name: 'Battuguldur'}, {$set:{address:{city: "IOWA"}}})
 db.grades.find({"address.city": "IOWA"})
 
@@ -44,3 +44,5 @@ db.grades.find().limit(2).sort({name: 1})
 db.grades.find().forEach(function(doc) {print("Customer Name: " + doc.name)})
 db.grades.find().forEach((doc) => {print("Customer Name: " + doc.name)})
 
+db.grades.find({ name: 'Battuguldur' }, { _id: 0, id: 0 })
+db.grades.find({ name: 'Battuguldur' }, { _id: 0, address: 0, sex: 0 })
