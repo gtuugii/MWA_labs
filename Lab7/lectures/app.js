@@ -4,13 +4,32 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const MongoClient = require('mongodb').MongoClient;
+const client = new MongoClient('mongodb+srv://test:test@mongodb-0besx.mongodb.net/mwa', { useNewUrlParser: true });
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-//var lecturesRouter = require('./routes/lectures');
-var lecturesRouter = require('./routes/lectures.mongoose');
+var lecturesRouter = require('./routes/lectures');
+//var lecturesRouter = require('./routes/lectures.mongoose');
 
 var app = express();
 var port = 8888;
+let db = null;
+
+app.use((req, res, next) => {
+  if (!db) {
+    client.connect(err => {
+      if (err) throw (err);
+      db = client.db("mwa");
+      req.db = db;
+      next();
+    })
+  }
+  else {
+    req.db = db;
+    next();
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,43 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const client = require('../models/lecture.model');
 const joi = require('joi');
-
 const jsonparser = express.json();
 
 router.get('/', (req, res, next) => {
-    //res.send("This is a secret message");
-    client.connect((err) => {
-        const db = client.db('mwa');
-        const collection = db.collection('lectures');
-        collection.find({}, (err, doc) => {
-            if(err) throw(err);
-
-            console.dir(doc);
-            res.send(doc);
-            client.close();
-        });
-    });
+    req.db.collection('lectures')
+        .find({})
+        .toArray()
+            .then(data => res.json(data))
+            .catch(err => console.log(err));
 });
 
 router.get('/:id', (req, res, next) => {
-    //console.log(req.params.id);
-    client.connect((err) => {
-        const db = client.db('mwa');
-        const collection = db.collection('lectures');
-        collection.findOne({ id: req.params.id }, (err, doc) => {
-            if (err) throw (err);
+    if(!req.params.id)
+        return res.status(400).send("ID parameter is missing.");
 
-            //console.dir(doc);
-            res.send(doc);
-            client.close();
-        });
+    req.db.collection('lectures')
+        .findOne({id: parseInt(req.params.id)}, (err, data) => {
+            if(err) throw(err);
+            res.json(data);
     });
 });
 
 router.delete('/:id', (req, res, next) => {
-    //res.send(req.params.id);
-    
+    if (!req.params.id)
+        return res.status(400).send("Id parameter is missing.");
+
+    req.db.collection('lectures')
+        .deleteOne({ id: parseInt(req.params.id) }, (err, data) => {
+            if (err) throw (err);
+            res.json(data);
+        });
 });
 
 router.post('/', jsonparser, (req, res, next) => {
@@ -47,9 +40,27 @@ router.post('/', jsonparser, (req, res, next) => {
     let { err } = validateData(req.body);
     if (err) return res.status(400).send(error.details[0].message);
 
-    //
-
+    req.db.collection('lectures')
+        .insert(req.body, (err) => {
+            if(err) throw(err);
+            else res.send(req.body);
+        });
+    
 });
+
+router.put('/', (req, res) => {
+    if (!req.body)
+        return res.status(400).send("Request body is missing");
+    let { err } = validateData(req.body);
+    if (err) return res.status(400).send(error.details[0].message);
+
+
+    req.db.collection('lectures')
+        .update({ id: parseInt(req.params.id) }, req.body, (err) => {
+            if (err) throw (err);
+            else res.send(req.body);
+        });
+})
 
 function validateData(data){
     const schema = {
