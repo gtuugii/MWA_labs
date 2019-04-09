@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const MongoClient = require('mongodb').MongoClient;
+const client = require('../models/lecture.model');
 const joi = require('joi');
 
 const jsonparser = express.json();
-
-const client = new MongoClient('mongodb+srv://test:test@mongodb-0besx.mongodb.net/test');
 
 router.get('/', (req, res, next) => {
     //res.send("This is a secret message");

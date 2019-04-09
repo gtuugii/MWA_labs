@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 //const client = new MongoClient('mongodb+srv://test:test@mongodb-0besx.mongodb.net/test');
-mongoose.connect('mongodb+srv://test:test@mongodb-0besx.mongodb.net/test');
+mongoose.connect('mongodb+srv://test:test@mongodb-0besx.mongodb.net/mwa');
 
 let lecturesSchema = new mongoose.Schema({
     id: {
@@ -19,4 +19,4 @@ let lecturesSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Lecures', lecturesSchema);
+module.exports = mongoose.model('Lectures', lecturesSchema);
