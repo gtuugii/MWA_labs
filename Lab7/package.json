@@ -4,6 +4,8 @@
   "description": "",
   "main": "Library-Schema.js",
   "scripts": {
+    "secret": "nodemon secret/app.js",
+    "lectures": "nodemon lectures/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
