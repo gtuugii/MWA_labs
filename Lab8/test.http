@@ -3,10 +3,10 @@
 GET http://localhost:8888/location/  HTTP/1.1
 ###
 
-GET http://localhost:8888/location/find/-91.963708/41.017450/3000/3  HTTP/1.1
+GET http://localhost:8888/location/find/-91.963708/41.017450/3000/4  HTTP/1.1
 ###
 
-DELETE http://localhost:8888/location/5cad478c721f971577e5e72d  HTTP/1.1
+DELETE http://localhost:8888/location/5cad5652dc87220405fba685  HTTP/1.1
 ###
 
 POST http://localhost:8888/location/  HTTP/1.1
