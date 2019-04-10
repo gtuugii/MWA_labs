@@ -7,13 +7,13 @@ GET http://localhost:8888/lectures/2  HTTP/1.1
 
 ###
 
-DELETE http://localhost:8888/lectures/0  HTTP/1.1
+DELETE http://localhost:8888/lectures/2  HTTP/1.1
 
 ###
 POST http://localhost:8888/lectures/  HTTP/1.1
 Content-Type: application/json
 
-{"id": "2", "course": "MWA2", "lecture": "MongoDB"}
+{"id": 2, "course": "MWA2", "lecture": "MongoDB"}
 
 ###
 
@@ -23,6 +23,6 @@ POST http://localhost:8888/lectures/search/MongoDB  HTTP/1.1
 PUT http://localhost:8888/lectures/  HTTP/1.1
 Content-Type: application/json
 
-{"id": "1", "course": "55555", "lecture": "MongoDB"}
+{"id": 1, "course": "55555", "lecture": "MongoDB"}
 
 ###

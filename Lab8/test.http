@@ -1,0 +1,30 @@
+
+
+GET http://localhost:8888/location/  HTTP/1.1
+###
+
+GET http://localhost:8888/location/find/-91.963708/41.017450/3000/3  HTTP/1.1
+###
+
+DELETE http://localhost:8888/location/5cad478c721f971577e5e72d  HTTP/1.1
+###
+
+POST http://localhost:8888/location/  HTTP/1.1
+Content-Type: application/json
+
+//db.location.createIndex({location: '2d'})
+
+//{"name": "MUM", "category": "MUM", "location": [-91.9665342, 41.017654]}
+//{"name": "4A", "category": "Utopia", "location": [-91.961841, 41.024536]}
+//{"name": "Golden Domes", "category": "MUM", "location": [-91.965672, 41.021412]}
+//{"name": "Recreation Center", "category": "MUM", "location": [-91.963708, 41.017450]}
+
+//db.location.createIndex({location: '2dsphere'})
+
+//{"name": "MUM", "category": "MUM", "location": {"type": "Point", "coordinates": [-91.9665342, 41.017654]}}
+//{"name": "4A", "category": "Utopia", "location": {"type": "Point", "coordinates": [-91.961841, 41.024536]}}
+//{"name": "Golden Domes", "category": "MUM", "location": {"type": "Point", "coordinates": [-91.965672, 41.021412]}}
+//{"name": "Recreation Center", "category": "MUM", "location": {"type": "Point", "coordinates": [-91.963708, 41.017450]}}
+
+###
+

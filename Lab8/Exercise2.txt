@@ -1,0 +1,1 @@
+We must create index for ISBN of Book and SSN of users in Library system because librarian need to search, insert, update, remove books in Library system. So it is very important.
