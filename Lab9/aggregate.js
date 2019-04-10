@@ -26,11 +26,17 @@ db.zipcode.aggregate([
 db.zipcode.aggregate([
     {
         $group: {
-            _id: { state: "$state"},
+            _id: { state: "$state", city: "$city"},
             population: { $min: "$pop" }
         }
     },
-    { $project: { _id: 0, "state": "$_id.state", "population": 1 } }
+    { $sort: { population: 1}},
+    {
+        $group: {
+            _id: "$_id",
+            city: { $first: "$_id.city" }
+        } 
+    }
 ])
 
 
