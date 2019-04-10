@@ -33,6 +33,17 @@ router.delete('/:id', (req, res, next) => {
         });
 });
 
+router.post('/search/:q', (req, res) => {
+    if (!req.params.q)
+        return res.status(400).send("lecture name q parameter is missing.");
+
+    req.db.collection('lectures')
+        .find({ lecture: { $regex: req.params.q}})
+        .toArray()
+        .then(data => res.json(data))
+        .catch(err => console.log(err));
+});
+
 router.post('/', jsonparser, (req, res, next) => {
     if(!req.body)
         return res.status(400).send("Request body is missing");
