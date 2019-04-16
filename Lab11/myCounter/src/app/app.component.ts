@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { applySourceSpanToStatementIfNeeded } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-root',
@@ -8,26 +7,28 @@ import { applySourceSpanToStatementIfNeeded } from '@angular/compiler/src/output
 //    < input[placeholder]="title" { input } = "do()" />
 //    < input[placeholder]="usernameProp" { input } = "do()" />
 //    < input[value]="title" #tag(keyup) = "tag.value" /> {{ tag.value }}
-  template : `
-    <input [value]="title" #tag (keyup)="whatever = tag.value" />{{tag.value}}
-    <button (click)="do()">clickme</button>
-    {{whatever}}
-
-    <scratch [monday]="title"><p #pero>Parapara here</p></scratch>
+  template: `
+  <div>
+    Counter Component 
+    <app-counter [counterValue]="componentCounterValue" (counterChange)="counterChange($event)">
+    </app-counter>
+    <br/>
+    Component Counter Value = {{componentCounterValue}}
+  </div>
   `,
-  styles: []
-  //styleUrls: ['./app.component.css']
+  styles: [`
+    div {
+        border: solid green 1px;
+        display: inline-block;
+      }
+    app-counter {
+        align : center;
+        display: inline-block;
+        padding: 30px;
+        font-size: 18pt;
+      }`],
 })
-
 export class AppComponent {
-  @ViewChild('tag') newValue;
-  
-  whatever;
-
-  title = 'myCounter';
-  usernameProp = 'username';
-
-  do(){
-    this.whatever = this.newValue.nativeElement.value;
-  }
+  componentCounterValue = 5;
+  counterChange(val) { this.componentCounterValue = val; }
 }
