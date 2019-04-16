@@ -12,11 +12,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styles: []
 })
 export class CounterComponent implements OnInit {
-
-  //@Input() counterValue: number;
-
   counterValue = 5;
-
+  //@Input() counterValue = 5;
+  
   inc() {
     this.counterValue ++;
   }

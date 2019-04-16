@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var University2 = /** @class */ (function () {
     function University2(name, dept) {
         this.name = name;
