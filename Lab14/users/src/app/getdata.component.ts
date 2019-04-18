@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetOnlineDataService } from './get-online-data.service';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-getdata',
@@ -14,7 +14,7 @@ import { GetOnlineDataService } from './get-online-data.service';
 })
 export class GetdataComponent implements OnInit {
 
-  constructor(private get: GetOnlineDataService ) {
+  constructor(private get: DataService ) {
     //get.getOnlineData();
    }
 

@@ -1,10 +1,28 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, Router, RouterModule } from '@angular/router';
+import { GetdataComponent } from './getdata.component';
 
-const routes: Routes = [];
+//import { NotFoundComponent } from '.'
+
+const routes: Routes = [
+  //{ path: '', redirectTo: 'users' },
+  //{ path: '/', redirectTo: 'users' },
+  { path: 'home', component: GetdataComponent },
+  { path: 'users', component: GetdataComponent,
+      children: [
+        { path: 'update', component: GetdataComponent}
+      ] },
+  { path: '*', redirectTo: 'users'}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+  //
+  constructor(private router: Router){
+    //this.router.navigate(['users', 'update'], {queryParams: {id: 1}});
+  }
+
+}
