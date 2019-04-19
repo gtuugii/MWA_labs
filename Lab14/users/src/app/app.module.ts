@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { GetdataComponent } from './getdata.component';
+import { ErrorComponent } from './error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GetdataComponent
+    GetdataComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

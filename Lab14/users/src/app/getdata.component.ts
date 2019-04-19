@@ -14,9 +14,11 @@ import { DataService } from './data.service';
 })
 export class GetdataComponent implements OnInit {
 
-  constructor(private get: DataService ) {
-    //get.getOnlineData();
-   }
+  constructor(private dataService: DataService ) {}
+
+  get(){
+    this.dataService.getCachedData();
+  }
 
   ngOnInit() {
 
