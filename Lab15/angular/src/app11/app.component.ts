@@ -1,23 +1,28 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from './user.service';
 
+//@import url('https://un');
+
 @Component({
   selector: 'app-root',
+  //template: '<app-databinding></app-databinding>',
   templateUrl: './app.component.html',
-  styles: []
+  styleUrls: []
 })
 export class AppComponent {
-  singupform: FormGroup;
+  title = 'angular';
+
+  signupform: FormGroup;
   loginform: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) {
-    this.singupform = this.formBuilder.group({
+  constructor(private formBuilder: FormBuilder, private userService: UserService){
+    this.signupform = this.formBuilder.group({
       'fname': ['', Validators.required],
       'lname': ['', Validators.required],
-      'email': ['', Validators.compose([Validators.required, Validators.email])],
-      'password': ['', Validators.compose([Validators.required])],
-      'confirmPassword': ['', Validators.required],
+      'email': ['', Validators.required, Validators.email],
+      'password': ['', Validators.required],
+      'passwordConfirm': ['', Validators.required],
       'policy': ['', Validators.requiredTrue]
     });
 
@@ -28,16 +33,17 @@ export class AppComponent {
     });
   }
 
-  onSignUpSubmit() {
-    console.log(this.singupform);
+  onSignupSubmit(){
+    console.log(this.signupform);
   }
 
-  onLoginSubmit() {
+  onLoginSubmit(){
     this.userService.login(this.loginform.get('email').value, this.loginform.get('password').value);
   }
 
-  onProtectedBtn() {
-    console.log("Hello");
+  onProtectedBtn(){
+    console.log('Hello');
     this.userService.verify();
   }
+
 }

@@ -1,0 +1,59 @@
+<h2>Sign Up</h2>
+Please fill in this form to create an account!
+
+<hr>
+
+<form [formGroup]="signupform" (ngSubmit) = "this.onSignUpSubmit()">
+  <div class="form-inline">
+    <div class="col-lg-6">
+      <input type="text" class="form-control" formControlName="fname" placeholder="First Name">
+    </div>
+    <div class="col-lg-6">
+      <input type="text" class="form-control" formControlName="lname" placeholder="Last Name">
+    </div>
+  </div>
+  <br>
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="email" placeholder="Email Address">
+    <div class="text-danger" *ngIf="signupform.get('email').dirty">
+      Invalid Email Address
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="password" class="form-control" formControlName="password" placeholder="Password">
+    <div class="text-danger" *ngIf="false">
+      Invalid Password
+    </div>
+  </div>
+
+  <div>
+    <input type="password" class="form-control" formControlName="passwordConfirm" placeholder="Password Confirm">
+    <div class="text-danger" *ngIf="signupform.get('password').dirty &&
+          signupform.get('password').value !== signupform.get('passwordConfirm').value">
+      Password doesn't match
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="checkbox" class="form-control" formControlName="policy" >
+    I accept the <a href="#">Term of Use</a> & <a href="#">Privacy Policy</a>.
+  </div>
+  <div class="form-group">
+    <button type="submit" class="form-control btn btn-primary" [disabled]="!signupform.valid">Signup</button>
+  </div>
+
+  <form [formGroup]="loginform" (ngSubmit)="this.onLoginSubmit()">
+    <div class="form-group">
+      <input type="text" class="form-control" formControlName="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" formControlName="password" placeholder="Password">
+    </div>
+    <div class="from-group">
+      <button type="submit" class="from-control btn btn-primary" [disabled]="!loginform.valid">Login</button>
+    </div>
+  </form>
+
+  <hr>
+  <button (click)="this.onProtectedBtn()">Send request to /protected</button>
