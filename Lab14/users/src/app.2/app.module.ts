@@ -1,25 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { ErrorComponent } from './error.component';
 
-const ROUTES:Routes = [
-  {path: 'users', loadChildren: './users/users.module#UsersModule'},
-  {path: 'notFound', component: ErrorComponent}
-];
+import { HttpClientModule } from '@angular/common/http';
+import { GetdataComponent } from './getdata.component';
+import { ErrorComponent } from './error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    GetdataComponent,
     ErrorComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
